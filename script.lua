@@ -70,7 +70,6 @@ function SCRIPT_TJAD75_FAKESCRIPT() -- UTChatBox.Chatscript
 	end))
 	Message.Text = "* "..String2:sub(1,i)
 	wait()
-	if String2:sub(i,i) == "," or String2:sub(i,i) == "%." then wait(0.5) end
 	end
 	wait(2)
 	Chatgui:Destroy()
