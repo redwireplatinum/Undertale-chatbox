@@ -1,5 +1,3 @@
-function onChatted(plr)
-plr.Chatted:connect(function(msg)
 -- Farewell Infortality.
 -- Version: 2.82
 -- Instances:
@@ -23,42 +21,63 @@ PlayerIcon.Name = "PlayerIcon"
 PlayerIcon.Parent = Frame
 PlayerIcon.BackgroundColor3 = Color3.new(1, 1, 1)
 PlayerIcon.BackgroundTransparency = 1
-PlayerIcon.Position = UDim2.new(0.0179487187, 0, 0.075000003, 0)
+PlayerIcon.Position = UDim2.new(0.0302079134, 0, 0.0687500015, 0)
 PlayerIcon.Size = UDim2.new(0, 136, 0, 136)
+PlayerIcon.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
 Message.Name = "Message"
 Message.Parent = Frame
 Message.BackgroundColor3 = Color3.new(1, 1, 1)
 Message.BackgroundTransparency = 1
-Message.Position = UDim2.new(0.210256398, 0, 0.0692499876, 0)
-Message.Size = UDim2.new(0, 606, 0, 136)
+Message.Position = UDim2.new(0.171877623, 0, 0.06925001, 0)
+Message.Size = UDim2.new(0, 936, 0, 136)
 Message.Font = Enum.Font.Arcade
-Message.Text = "* "
+Message.Text = "* Heya, kiddo."
 Message.TextColor3 = Color3.new(1, 1, 1)
-Message.TextSize = 26
+Message.TextSize = 36
 Message.TextWrapped = true
 Message.TextXAlignment = Enum.TextXAlignment.Left
 Message.TextYAlignment = Enum.TextYAlignment.Top
-local userId = plr.UserId
-local thumbType = Enum.ThumbnailType.HeadShot
-local thumbSize = Enum.ThumbnailSize.Size420x420
-local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
-PlayerIcon.Image = content
-for i = 1, msg:len() do
-coroutine.resume(coroutine.create(function()
-local s = Instance.new("Sound", workspace)
-s.SoundId = "rbxassetid://5416666166"
-repeat wait() until s.TimeLength ~= 0
-s:Play()
-wait(s.TimeLength)
-s:Destroy()
-end))
-Message.Text = "* "..msg:sub(1,i)
-wait()
+-- Scripts:
+function SCRIPT_TJAD75_FAKESCRIPT() -- UTChatBox.Chatscript 
+	local script = Instance.new('LocalScript')
+	script.Parent = UTChatBox
+	local gui = script.Parent
+	gui.Enabled = false
+	function PlayerChatted(plr)
+	plr.Chatted:connect(function(String)
+	local Chatgui = gui:Clone()
+	Chatgui.Parent = game.Players.LocalPlayer.PlayerGui
+	local Message = Chatgui.Frame.Message
+	local userId = plr.UserId
+	local thumbType = Enum.ThumbnailType.HeadShot
+	local thumbSize = Enum.ThumbnailSize.Size420x420
+	local content = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+	Chatgui.Frame.PlayerIcon.Image = content
+	Chatgui.Enabled = true
+	local String2 = String:sub(1,1):upper()..String:sub(2)
+	if not String:find("%.") and not String:find("?") and not String:find("!") then
+	    String2 = String2.."."
+	end
+	for i = 1, String2:len() do
+	coroutine.resume(coroutine.create(function()
+	local s = Instance.new("Sound", workspace)
+	s.SoundId = "rbxassetid://5416666166"
+	repeat wait() until s.TimeLength ~= 0
+	s:Play()
+	wait(s.TimeLength)
+	s:Destroy()
+	end))
+	Message.Text = "* "..String2:sub(1,i)
+	wait()
+	if String2:sub(i,i) == "," or String2:sub(i,i) == "%." then wait(0.5) end
+	end
+	wait(2)
+	Chatgui:Destroy()
+	end)
+	end
+	for i,v in pairs(game.Players:GetPlayers()) do PlayerChatted(v) end
+	game.Players.PlayerAdded:connect(PlayerChatted)
+
 end
-wait(2)
-UTChatBox:Destroy()
-end)
-end
-for i,v in pairs(game.Players:GetPlayers()) do onChatted(v) end
-game.Players.PlayerAdded:connect(onChatted)
+coroutine.resume(coroutine.create(SCRIPT_TJAD75_FAKESCRIPT))
