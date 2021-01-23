@@ -7,7 +7,7 @@ local PlayerIcon = Instance.new("ImageLabel")
 local Message = Instance.new("TextLabel")
 --Properties:
 UTChatBox.Name = "UTChatBox"
-UTChatBox.Parent = game.Players.LocalPlayer.PlayerGui
+UTChatBox.Parent = game.CoreGui
 
 Frame.Parent = UTChatBox
 Frame.Active = true
