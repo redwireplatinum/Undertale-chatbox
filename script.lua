@@ -60,6 +60,7 @@ function SCRIPT_TJAD75_FAKESCRIPT() -- UTChatBox.Chatscript
 	    String2 = String2.."."
 	end
 	for i = 1, String2:len() do
+	if String2:len() ~= " " then
 	coroutine.resume(coroutine.create(function()
 	local s = Instance.new("Sound", workspace)
 	s.SoundId = "rbxassetid://5416666166"
@@ -68,6 +69,7 @@ function SCRIPT_TJAD75_FAKESCRIPT() -- UTChatBox.Chatscript
 	wait(s.TimeLength)
 	s:Destroy()
 	end))
+	end
 	Message.Text = "* "..String2:sub(1,i)
 	wait()
 	end
