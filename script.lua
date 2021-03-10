@@ -47,7 +47,7 @@ function SCRIPT_TJAD75_FAKESCRIPT() -- UTChatBox.Chatscript
 	function PlayerChatted(plr)
 	plr.Chatted:connect(function(String)
 	local Chatgui = gui:Clone()
-	Chatgui.Parent = game.Players.LocalPlayer.PlayerGui
+	Chatgui.Parent = game.CoreGui
 	local Message = Chatgui.Frame.Message
 	local userId = plr.UserId
 	local thumbType = Enum.ThumbnailType.HeadShot
